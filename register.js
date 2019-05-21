@@ -17,36 +17,31 @@ function getValue() {
             //console.log(prices);
             var rawChange = prices[1] - prices[0];
             var change = rawChange.toFixed(2);
-            console.log(change);
+            //console.log(change);
+            makeChange(change);
         }
-
     })
-
-
 }
 
-//makeChange(3.12, 7); 
+function makeChange(change) {
+    if (change == 0.00 ) {
+        console.log(change + " || " + " NO CHANGE NEEDED" +
+         "\n" + "*********************************************************************************************************"); 
+    }
 
-// function makeChange(actualPrice, pricePaid) {
-//     if (pricePaid > actualPrice) {
-//         var change = parseInt(pricePaid) - parseInt(actualPrice); 
-//         console.log("$" + change)
-//     }
-// }
-
-  //how can you decide the least amount of currency to use to make the change
-
-//   var dollar = 1;
-//   var five = 5;
-//   var ten = 10; 
-//   var twenty = 20; 
-//   var fifty = 50; 
-//   var hundred = 100; 
-
-//   var penny = .01; 
-//   var nickel = .05; 
-//   var dime = .10;
-//   var quarter = .25;
-
-// need to work on splitting the arguments but i think a google should solve that. 
-// It is reading the file so thats good
+    else if (change != 0.00){
+       var cents = change * 100; // 1.68 = 168
+       var totalDollar = (cents / 100) >> 0; //1   
+       var remaining = change - totalDollar; // .68 
+       var totalQuarter = (remaining / .25) >> 0; // 2 
+       var lessQuarter = remaining - (totalQuarter * .25) //.18
+       var totalDime = (lessQuarter / .10) >> 0; // 1 
+       var lessDime = lessQuarter - (totalDime * .10) // .08
+       var totalNickel = (lessDime / .05) >> 0; // 1
+       var lessNickel  = lessDime - (totalNickel * .05) // .03
+       var totalPenny = lessNickel / 1; //.03
+       
+       console.log(change + " || " + totalDollar + " dollar(s) " + totalQuarter + " Quarter(s) " + totalDime + " Dime(s) " + totalNickel + " Nickel(s) " + totalPenny + " Pennie(s) " + 
+       "\n" + "*********************************************************************************************************"); 
+    }
+}
