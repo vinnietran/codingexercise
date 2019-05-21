@@ -1,46 +1,38 @@
 
 var axios = require("axios");
 var fs = require("fs");
-var userOption = process.argv[2];
-var input = process.argv.slice(3).join(" ");
-
 getValue();
 
-var prices = []; 
+
 
 function getValue() {
     fs.readFile("price.txt", "utf8", function (error, data) {
         if (error) {
             return console.log(error);
         }
-        var dataRdm = data.split(" ");
-        //showSongInfo(dataRdm[1])
-        //console.log(data);
-       // console.log(dataRdm);
-  
-        prices.push(dataRdm);
-        //splits it at the comma so anything before comma will be retuned
-        //need to split it at the line break
-        // makeChange(data); 
+        var dataRdm = data.split("\n");
 
-        for (var i = 0; i < dataRdm.length; i++){
-            console.log(dataRdm[i]);
-            var calculate = dataRdm[i];
-            makeChange(calculate);
+        for (var i = 0; i < dataRdm.length; i++) {
+            var prices = dataRdm[i].split(",");
+            //console.log(prices);
+            var rawChange = prices[1] - prices[0];
+            var change = rawChange.toFixed(2);
+            console.log(change);
         }
+
     })
 
-    
+
 }
 
 //makeChange(3.12, 7); 
 
-function makeChange(actualPrice, pricePaid) {
-    if (pricePaid > actualPrice) {
-        var change = parseInt(pricePaid) - parseInt(actualPrice); 
-        console.log("$" + change)
-    }
-}
+// function makeChange(actualPrice, pricePaid) {
+//     if (pricePaid > actualPrice) {
+//         var change = parseInt(pricePaid) - parseInt(actualPrice); 
+//         console.log("$" + change)
+//     }
+// }
 
   //how can you decide the least amount of currency to use to make the change
 
@@ -55,3 +47,6 @@ function makeChange(actualPrice, pricePaid) {
 //   var nickel = .05; 
 //   var dime = .10;
 //   var quarter = .25;
+
+// need to work on splitting the arguments but i think a google should solve that. 
+// It is reading the file so thats good
