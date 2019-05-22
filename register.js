@@ -1,9 +1,8 @@
 
 var axios = require("axios");
 var fs = require("fs");
+
 getValue();
-
-
 
 function getValue() {
     fs.readFile("price.txt", "utf8", function (error, data) {
@@ -24,24 +23,39 @@ function getValue() {
 }
 
 function makeChange(change) {
-    if (change == 0.00 ) {
+    //creating variable for the 'twist the customer asked for so that it can be easily changed if needed
+    var twist = 3; 
+    //change will not be needed if the buyer pays the exact amount 
+    if (change == 0.00) {
         console.log(change + " || " + " NO CHANGE NEEDED" +
-         "\n" + "*********************************************************************************************************"); 
+            "\n" + "*********************************************************************************************************");
     }
 
-    else if (change != 0.00){
-       var cents = change * 100; // 1.68 = 168
-       var totalDollar = (cents / 100) >> 0; //1   
-       var remaining = change - totalDollar; // .68 
-       var totalQuarter = (remaining / .25) >> 0; // 2 
-       var lessQuarter = remaining - (totalQuarter * .25) //.18
-       var totalDime = (lessQuarter / .10) >> 0; // 1 
-       var lessDime = lessQuarter - (totalDime * .10) // .08
-       var totalNickel = (lessDime / .05) >> 0; // 1
-       var lessNickel  = lessDime - (totalNickel * .05) // .03
-       var totalPenny = lessNickel / 1; //.03
-       
-       console.log(change + " || " + totalDollar + " dollar(s) " + totalQuarter + " Quarter(s) " + totalDime + " Dime(s) " + totalNickel + " Nickel(s) " + totalPenny + " Pennie(s) " + 
-       "\n" + "*********************************************************************************************************"); 
+    //condition for when the change due is not divisible by 3 
+    else if (change % twist != 0) {
+        var cents = change * 100; // 1.68 = 168
+        var totalDollar = (cents / 100) >> 0; //1   
+        var remaining = change - totalDollar; // .68 
+        var totalQuarter = (remaining / .25) >> 0; // 2 
+        var lessQuarter = remaining - (totalQuarter * .25) //.18
+        var totalDime = (lessQuarter / .10) >> 0; // 1 
+        var lessDime = lessQuarter - (totalDime * .10) // .08
+        var totalNickel = (lessDime / .05) >> 0; // 1
+        var lessNickel = lessDime - (totalNickel * .05) // .03
+        var totalPenny = (lessNickel / .01).toFixed(0); //.03
+
+        // try to create conditional statements to only display change that != 0 ie if totalquarter = 0 then dont print it 
+
+        console.log(change + " || " + totalDollar + " dollar(s) " + totalQuarter + " Quarter(s) " + totalDime + " Dime(s) "
+            + totalNickel + " Nickel(s) " + totalPenny + " Pennie(s) " +
+            "\n" + "*********************************************************************************************************");
     }
+
+    //condition for when the change due is divisible by 3
+    else if (change % twist == 0) {
+        var change = [1, .25, .10, .05, .01]
+        var randChange = change[Math.floor(Math.random() * change.length)];
+        console.log(randChange);
+    }
+
 }
