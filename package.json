@@ -19,6 +19,8 @@
   "homepage": "https://github.com/vinnietran/codingexercise#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "fs": "0.0.1-security"
+    "express": "^4.17.0",
+    "fs": "0.0.1-security",
+    "jquery": "^3.4.1"
   }
 }

@@ -2,6 +2,26 @@
 var axios = require("axios");
 var fs = require("fs");
 
+// var express = require("express");
+
+// var app = express();
+// var PORT = 3000;
+
+// // Sets up the Express app to handle data parsing
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+
+// app.listen(PORT, function() {
+//     console.log("App listening on PORT " + PORT);
+//   });
+
+//   app.get("/", function(req, res) {
+//     res.send("Welcome to the Star Wars Page!");
+//   });
+// $(document).ready(function () {
+//    
+// });
+
 getValue();
 
 function getValue() {
@@ -49,13 +69,17 @@ function makeChange(change) {
         console.log(change + " || " + totalDollar + " dollar(s) " + totalQuarter + " Quarter(s) " + totalDime + " Dime(s) "
             + totalNickel + " Nickel(s) " + totalPenny + " Pennie(s) " +
             "\n" + "*********************************************************************************************************");
+
+            // if (totalDollar != 0) {
+            //     $("#tend").append(totalDollar + " Dollar(s) ")
+            // }
     }
 
     //condition for when the change due is divisible by 3
     else if (change % twist == 0) {
-        var change = [1, .25, .10, .05, .01]
-        var randChange = change[Math.floor(Math.random() * change.length)];
-        console.log(randChange);
+        var changes = [1, .25, .10, .05, .01]
+        var randChange = changes[Math.floor(Math.random() * changes.length)];
+        console.log(change + "||" + randChange + "\n" + 
+        "*********************************************************************************************************");
     }
-
 }
